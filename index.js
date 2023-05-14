@@ -10,15 +10,18 @@ window.addEventListener('resize', () => {
 })
 
 const mouse = {
-    x: 0,
-    y: 0,
+    x: undefined,
+    y: undefined,
 }
 
 window.addEventListener('click', (e) => {
     mouse.x = e.x
     mouse.y = e.y
-    drawCircle()
+})
 
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x
+    mouse.y = e.y
 })
 
 function drawCircle() {
@@ -28,4 +31,10 @@ function drawCircle() {
     ctx.fill()
 }
 
+function animate(timeStamp) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawCircle()
+    requestAnimationFrame(animate)
+}
 
+animate()
